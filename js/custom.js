@@ -130,6 +130,11 @@ $(window).on('load', function(){
 	let videoCta = document.querySelector('[data-video-cta]');
 	playVideo.addEventListener('click', toggleVideo);
 	videoBox.addEventListener('click', toggleVideo);
+	videoBox.addEventListener('fullscreenchange', function() {
+		if (!videoBox.fullscreenElement) {
+		    toggleVideo();
+		}
+	});
 	document.addEventListener('keydown', function (event){
 		if (event.key === 'Escape' && !videoBox.paused) {
 			toggleVideo(event);
