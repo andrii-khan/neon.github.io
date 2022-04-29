@@ -35,6 +35,11 @@ Version: 1.0
 /* 			               01. GENERAL LAYOUT                 */
 /* ========================================================== */
 
+img {
+	max-width: 100%;
+	height: auto;
+}
+
 ul {
 	padding: 0;
 }
@@ -1864,7 +1869,7 @@ ul.partners-mentions li img:hover {
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	min-height: 620px;
+	padding-top: 100px;
 }
 .ba-intro-section__video {
 	position: absolute;
@@ -1937,12 +1942,19 @@ ul.partners-mentions li img:hover {
 .ba-intro-section__cta:focus {
 	outline: none;
 }
+.ba-video-mobile {
+	width: 100%;
+}
+#video-popup .mfp-close {
+	color: #fff;
+	transform: translateY(-100%);
+}
 @media (min-width: 1440px) {
 	.ba-intro-section {
 		padding-top: 100px;
 	}
 	.ba-intro-section__cta-block {
-		margin-bottom: 100px;
+		margin-bottom: 60px;
 	}
 }
 @media (min-width: 1200px) {

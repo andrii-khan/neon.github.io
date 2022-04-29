@@ -130,11 +130,6 @@ $(window).on('load', function(){
 	let videoCta = document.querySelector('[data-video-cta]');
 	playVideo.addEventListener('click', toggleVideo);
 	videoBox.addEventListener('click', toggleVideo);
-	videoBox.addEventListener('fullscreenchange', function() {
-		if (!videoBox.fullscreenElement) {
-		    toggleVideo();
-		}
-	});
 	document.addEventListener('keydown', function (event){
 		if (event.key === 'Escape' && !videoBox.paused) {
 			toggleVideo(event);
@@ -143,21 +138,23 @@ $(window).on('load', function(){
 	let intervalShow, intervalHide;
 	function toggleVideo(event) {
 		event.preventDefault();
-		videoBox.classList.toggle('open');
 		videoBox.volume = 0.2;
-		if (videoBox.paused) {
+		if (videoBox.paused && !videoBox.classList.contains('open')) {
 			videoBox.play();
-			intervalShow = setInterval(() => {
-				showVideoCta();
-			}, 5000);
-			intervalHide = setInterval(() => {
-				hideVideoCta();
-			}, 9000);
+			videoBox.classList.add('open');
+			// intervalShow = setInterval(() => {
+			// 	showVideoCta();
+			// }, 5000);
+			// intervalHide = setInterval(() => {
+			// 	hideVideoCta();
+			// }, 9000);
+
 		} else {
+			videoBox.classList.remove('open');
 			videoBox.pause();
-			clearInterval(intervalShow);
-			clearInterval(intervalHide);
-			hideVideoCta();
+			// clearInterval(intervalShow);
+			// clearInterval(intervalHide);
+			// hideVideoCta();
 		}
 	}
 
@@ -168,6 +165,23 @@ $(window).on('load', function(){
 	function hideVideoCta() {
 		videoCta.classList.remove('show');
 	}
+
+	let videoMobile = document.querySelector('[data-video-mobile]');
+	videoMobile.src = videoBox.currentSrc;
+	let playVideoMobile = $('[data-play-video-mobile]');
+	playVideoMobile.magnificPopup({
+		type: 'inline',
+		callbacks: {
+			beforeOpen: function() {
+			},
+			open: function() {
+				videoMobile.play();
+			},
+			close: function() {
+				videoMobile.pause();
+			}
+		}
+	});
 
 	/* ========================================================== */
 	/*   Popup-Gallery                                            */
