@@ -172,8 +172,6 @@ $(window).on('load', function(){
 	playVideoMobile.magnificPopup({
 		type: 'inline',
 		callbacks: {
-			beforeOpen: function() {
-			},
 			open: function() {
 				videoMobile.play();
 			},
