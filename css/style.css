@@ -1928,8 +1928,9 @@ ul.partners-mentions li img:hover {
 }
 .ba-intro-section__cta--video {
 	position: absolute;
-	bottom: 50px;
-	left: 30%;
+	z-index: 2;
+	bottom: 80px;
+	left: 15px;
 	opacity: 0;
 	visibility: hidden;
 	transition-property: opacity, visibility;

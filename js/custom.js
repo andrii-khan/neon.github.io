@@ -130,6 +130,23 @@ $(window).on('load', function(){
 	let videoCta = document.querySelector('[data-video-cta]');
 	playVideo.addEventListener('click', toggleVideo);
 	videoBox.addEventListener('click', toggleVideo);
+	let visibleTime = +videoBox.getAttribute('data-visible-time') || 3;
+	let showTime = +videoBox.getAttribute('data-show-time') || 5;
+	let pauseTime = 0;
+	videoBox.addEventListener('timeupdate', () => {
+		let currentTime = Math.floor(videoBox.currentTime);
+		if (currentTime === pauseTime + showTime) {
+			showVideoCta();
+			setTimeout(() => {
+				console.log('скрываем на ', currentTime);
+				hideVideoCta();
+			}, visibleTime*1000);
+		}
+	});
+	videoBox.addEventListener('pause', () => {
+		pauseTime = Math.floor(videoBox.currentTime);
+		hideVideoCta();
+	});
 	document.addEventListener('keydown', function (event){
 		if (event.key === 'Escape' && !videoBox.paused) {
 			toggleVideo(event);
